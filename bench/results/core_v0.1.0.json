@@ -1,0 +1,267 @@
+{
+  "format_version": 1,
+  "preflight": "ASSESSED_RUN",
+  "evidence": "CLAIM_FACING",
+  "placement": "LOCAL_EXECUTION; one worker and one BLAS/OpenMP thread",
+  "python": "3.13.3",
+  "platform": "macOS-26.5.1-arm64-arm-64bit-Mach-O",
+  "machine": "arm64",
+  "dependencies": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "mpmath": "1.3.0",
+    "sympy": "1.14.0",
+    "python-flint": "0.8.0"
+  },
+  "timer": "perf_counter; validation and profiling excluded from timings",
+  "memory": "Fresh-worker absolute peak RSS after timing includes imports, inputs, outputs and validation. Python traced peak is one separate call and excludes untraced native allocations.",
+  "cost": "Setup/import, first call and warm public calls are separated. Internal caches may be reused.",
+  "results": [
+    {
+      "case": "small",
+      "settings": {
+        "density": 1.5,
+        "x": 0.25,
+        "y": 1.1,
+        "radius": 6,
+        "length": 12,
+        "grid": 12,
+        "variant": "reference",
+        "cost_scope": "plan construction plus bounds"
+      },
+      "validation": {
+        "passed": true,
+        "endpoint_atol": 2e-12,
+        "endpoint_rtol": 2e-12,
+        "analytic_errors": {
+          "gaussian_tail": 1.274973646328754e-29,
+          "localization": 0.0024624503350837994,
+          "phase_grid": 0.04752379894607933
+        },
+        "roundoff_certified": false
+      },
+      "source_sha256": "1607c25a09ab0c2267ae3bde702e44178093f7f8c956649b611403c2c7cb6d19",
+      "setup_seconds": 0.09884054097346961,
+      "first_call_seconds": 0.0005896249786019325,
+      "warm_seconds": [
+        0.0005867909640073776,
+        0.0005474589997902513,
+        0.0005799999926239252,
+        0.0005384170217439532,
+        0.0006115840515121818
+      ],
+      "median_seconds": 0.0005799999926239252,
+      "minimum_seconds": 0.0005384170217439532,
+      "maximum_seconds": 0.0006115840515121818,
+      "python_traced_peak_bytes": 73110,
+      "fresh_worker_peak_rss_bytes": 54689792,
+      "profile": "         966 function calls (963 primitive calls) in 0.001 seconds\n\n   Ordered by: cumulative time\n   List reduced from 87 to 14 due to restriction <14>\n\n   ncalls  tottime  percall  cumtime  percall filename:lineno(function)\n        1    0.000    0.000    0.001    0.001 core_cases.py:12(call)\n        1    0.000    0.000    0.001    0.001 sections.py:159(bounds)\n       12    0.000    0.000    0.000    0.000 sections.py:145(matrix)\n       13    0.000    0.000    0.000    0.000 _linalg.py:1269(eigvalsh)\n        1    0.000    0.000    0.000    0.000 sections.py:50(__init__)\n       12    0.000    0.000    0.000    0.000 sections.py:136(band)\n       12    0.000    0.000    0.000    0.000 einsumfunc.py:1242(einsum)\n       12    0.000    0.000    0.000    0.000 {built-in method numpy._core._multiarray_umath.c_einsum}\n        1    0.000    0.000    0.000    0.000 _function_base_impl.py:5063(meshgrid)\n       61    0.000    0.000    0.000    0.000 {built-in method builtins.isinstance}\n       94    0.000    0.000    0.000    0.000 {built-in method numpy.arange}\n       15    0.000    0.000    0.000    0.000 sections.py:25(finite_real)\n       72    0.000    0.000    0.000    0.000 {method 'conj' of 'numpy.ndarray' objects}\n       29    0.000    0.000    0.000    0.000 <frozen abc>:117(__instancecheck__)\n\n\n",
+      "implementation": "reference"
+    },
+    {
+      "case": "small",
+      "settings": {
+        "density": 1.5,
+        "x": 0.25,
+        "y": 1.1,
+        "radius": 6,
+        "length": 12,
+        "grid": 12,
+        "variant": "optimized",
+        "cost_scope": "plan construction plus bounds"
+      },
+      "validation": {
+        "passed": true,
+        "endpoint_atol": 2e-12,
+        "endpoint_rtol": 2e-12,
+        "analytic_errors": {
+          "gaussian_tail": 1.274973646328754e-29,
+          "localization": 0.0024624503350837994,
+          "phase_grid": 0.04752379894607933
+        },
+        "roundoff_certified": false
+      },
+      "source_sha256": "1607c25a09ab0c2267ae3bde702e44178093f7f8c956649b611403c2c7cb6d19",
+      "setup_seconds": 0.08868591603823006,
+      "first_call_seconds": 0.0005704590585082769,
+      "warm_seconds": [
+        0.0005062079289928079,
+        0.000489374971948564,
+        0.00048233300913125277,
+        0.0004923749947920442,
+        0.00048620894085615873
+      ],
+      "median_seconds": 0.000489374971948564,
+      "minimum_seconds": 0.00048233300913125277,
+      "maximum_seconds": 0.0005062079289928079,
+      "python_traced_peak_bytes": 63802,
+      "fresh_worker_peak_rss_bytes": 54624256,
+      "profile": "         798 function calls (795 primitive calls) in 0.001 seconds\n\n   Ordered by: cumulative time\n   List reduced from 104 to 14 due to restriction <14>\n\n   ncalls  tottime  percall  cumtime  percall filename:lineno(function)\n        1    0.000    0.000    0.001    0.001 core_cases.py:12(call)\n        1    0.000    0.000    0.001    0.001 sections.py:159(bounds)\n       12    0.000    0.000    0.000    0.000 _util.py:1102(wrapper)\n       12    0.000    0.000    0.000    0.000 _decomp.py:688(eig_banded)\n        1    0.000    0.000    0.000    0.000 sections.py:50(__init__)\n       12    0.000    0.000    0.000    0.000 sections.py:136(band)\n       12    0.000    0.000    0.000    0.000 einsumfunc.py:1242(einsum)\n       12    0.000    0.000    0.000    0.000 {built-in method numpy._core._multiarray_umath.c_einsum}\n       12    0.000    0.000    0.000    0.000 _util.py:364(_asarray_validated)\n        1    0.000    0.000    0.000    0.000 _function_base_impl.py:5063(meshgrid)\n       73    0.000    0.000    0.000    0.000 {built-in method builtins.isinstance}\n       15    0.000    0.000    0.000    0.000 sections.py:25(finite_real)\n        1    0.000    0.000    0.000    0.000 _stride_tricks_impl.py:588(broadcast_arrays)\n       12    0.000    0.000    0.000    0.000 _function_base_impl.py:615(asarray_chkfinite)\n\n\n",
+      "implementation": "optimized"
+    },
+    {
+      "case": "medium",
+      "settings": {
+        "density": 1.5,
+        "x": 0.25,
+        "y": 1.1,
+        "radius": 6,
+        "length": 32,
+        "grid": 24,
+        "variant": "optimized",
+        "cost_scope": "plan construction plus bounds"
+      },
+      "validation": {
+        "passed": true,
+        "endpoint_atol": 2e-12,
+        "endpoint_rtol": 2e-12,
+        "analytic_errors": {
+          "gaussian_tail": 1.274973646328754e-29,
+          "localization": 0.0003462820783711593,
+          "phase_grid": 0.023761899473039666
+        },
+        "roundoff_certified": false
+      },
+      "source_sha256": "1607c25a09ab0c2267ae3bde702e44178093f7f8c956649b611403c2c7cb6d19",
+      "setup_seconds": 0.09441766701638699,
+      "first_call_seconds": 0.003497042111121118,
+      "warm_seconds": [
+        0.0034049589885398746,
+        0.0034399169962853193,
+        0.0034401670563966036,
+        0.003383583971299231,
+        0.0034382500452920794
+      ],
+      "median_seconds": 0.0034382500452920794,
+      "minimum_seconds": 0.003383583971299231,
+      "maximum_seconds": 0.0034401670563966036,
+      "python_traced_peak_bytes": 151482,
+      "fresh_worker_peak_rss_bytes": 54771712,
+      "profile": "         1410 function calls (1407 primitive calls) in 0.004 seconds\n\n   Ordered by: cumulative time\n   List reduced from 104 to 14 due to restriction <14>\n\n   ncalls  tottime  percall  cumtime  percall filename:lineno(function)\n        1    0.000    0.000    0.004    0.004 core_cases.py:12(call)\n        1    0.000    0.000    0.004    0.004 sections.py:159(bounds)\n       24    0.000    0.000    0.003    0.000 _util.py:1102(wrapper)\n       24    0.003    0.000    0.003    0.000 _decomp.py:688(eig_banded)\n       24    0.000    0.000    0.000    0.000 sections.py:136(band)\n       24    0.000    0.000    0.000    0.000 einsumfunc.py:1242(einsum)\n       24    0.000    0.000    0.000    0.000 {built-in method numpy._core._multiarray_umath.c_einsum}\n        1    0.000    0.000    0.000    0.000 sections.py:50(__init__)\n       24    0.000    0.000    0.000    0.000 _util.py:364(_asarray_validated)\n       24    0.000    0.000    0.000    0.000 _function_base_impl.py:615(asarray_chkfinite)\n      133    0.000    0.000    0.000    0.000 {built-in method builtins.isinstance}\n       27    0.000    0.000    0.000    0.000 sections.py:25(finite_real)\n       24    0.000    0.000    0.000    0.000 _aliases.py:70(asarray)\n       53    0.000    0.000    0.000    0.000 <frozen abc>:117(__instancecheck__)\n\n\n",
+      "implementation": "optimized"
+    },
+    {
+      "case": "medium",
+      "settings": {
+        "density": 1.5,
+        "x": 0.25,
+        "y": 1.1,
+        "radius": 6,
+        "length": 32,
+        "grid": 24,
+        "variant": "reference",
+        "cost_scope": "plan construction plus bounds"
+      },
+      "validation": {
+        "passed": true,
+        "endpoint_atol": 2e-12,
+        "endpoint_rtol": 2e-12,
+        "analytic_errors": {
+          "gaussian_tail": 1.274973646328754e-29,
+          "localization": 0.0003462820783711593,
+          "phase_grid": 0.023761899473039666
+        },
+        "roundoff_certified": false
+      },
+      "source_sha256": "1607c25a09ab0c2267ae3bde702e44178093f7f8c956649b611403c2c7cb6d19",
+      "setup_seconds": 0.0958140839356929,
+      "first_call_seconds": 0.0064442920265719295,
+      "warm_seconds": [
+        0.006417667027562857,
+        0.006452083005569875,
+        0.006500625051558018,
+        0.006389832939021289,
+        0.00647233403287828
+      ],
+      "median_seconds": 0.006452083005569875,
+      "minimum_seconds": 0.006389832939021289,
+      "maximum_seconds": 0.006500625051558018,
+      "python_traced_peak_bytes": 269174,
+      "fresh_worker_peak_rss_bytes": 54558720,
+      "profile": "         1746 function calls (1743 primitive calls) in 0.007 seconds\n\n   Ordered by: cumulative time\n   List reduced from 87 to 14 due to restriction <14>\n\n   ncalls  tottime  percall  cumtime  percall filename:lineno(function)\n        1    0.000    0.000    0.007    0.007 core_cases.py:12(call)\n        1    0.000    0.000    0.007    0.007 sections.py:159(bounds)\n       25    0.006    0.000    0.006    0.000 _linalg.py:1269(eigvalsh)\n       24    0.000    0.000    0.001    0.000 sections.py:145(matrix)\n       24    0.000    0.000    0.000    0.000 sections.py:136(band)\n       24    0.000    0.000    0.000    0.000 einsumfunc.py:1242(einsum)\n       24    0.000    0.000    0.000    0.000 {built-in method numpy._core._multiarray_umath.c_einsum}\n        1    0.000    0.000    0.000    0.000 sections.py:50(__init__)\n      109    0.000    0.000    0.000    0.000 {built-in method builtins.isinstance}\n      178    0.000    0.000    0.000    0.000 {built-in method numpy.arange}\n      144    0.000    0.000    0.000    0.000 {method 'conj' of 'numpy.ndarray' objects}\n       27    0.000    0.000    0.000    0.000 sections.py:25(finite_real)\n       53    0.000    0.000    0.000    0.000 <frozen abc>:117(__instancecheck__)\n       26    0.000    0.000    0.000    0.000 sections.py:19(positive_integer)\n\n\n",
+      "implementation": "reference"
+    },
+    {
+      "case": "large",
+      "settings": {
+        "density": 1.5,
+        "x": 0.25,
+        "y": 1.1,
+        "radius": 6,
+        "length": 64,
+        "grid": 48,
+        "variant": "reference",
+        "cost_scope": "plan construction plus bounds"
+      },
+      "validation": {
+        "passed": true,
+        "endpoint_atol": 2e-12,
+        "endpoint_rtol": 2e-12,
+        "analytic_errors": {
+          "gaussian_tail": 1.274973646328754e-29,
+          "localization": 8.657051959278982e-05,
+          "phase_grid": 0.011880949736519833
+        },
+        "roundoff_certified": false
+      },
+      "source_sha256": "1607c25a09ab0c2267ae3bde702e44178093f7f8c956649b611403c2c7cb6d19",
+      "setup_seconds": 0.13108837499748915,
+      "first_call_seconds": 0.04236016690265387,
+      "warm_seconds": [
+        0.0418594159418717,
+        0.043480166932567954,
+        0.04250400001183152,
+        0.042312083998695016,
+        0.043820374994538724
+      ],
+      "median_seconds": 0.04250400001183152,
+      "minimum_seconds": 0.0418594159418717,
+      "maximum_seconds": 0.043820374994538724,
+      "python_traced_peak_bytes": 796150,
+      "fresh_worker_peak_rss_bytes": 55410688,
+      "profile": "         3306 function calls (3303 primitive calls) in 0.044 seconds\n\n   Ordered by: cumulative time\n   List reduced from 87 to 14 due to restriction <14>\n\n   ncalls  tottime  percall  cumtime  percall filename:lineno(function)\n        1    0.000    0.000    0.044    0.044 core_cases.py:12(call)\n        1    0.000    0.000    0.044    0.044 sections.py:159(bounds)\n       49    0.041    0.001    0.041    0.001 _linalg.py:1269(eigvalsh)\n       48    0.001    0.000    0.003    0.000 sections.py:145(matrix)\n       48    0.000    0.000    0.001    0.000 sections.py:136(band)\n       48    0.000    0.000    0.001    0.000 einsumfunc.py:1242(einsum)\n       48    0.001    0.000    0.001    0.000 {built-in method numpy._core._multiarray_umath.c_einsum}\n        1    0.000    0.000    0.000    0.000 sections.py:50(__init__)\n       49    0.000    0.000    0.000    0.000 {built-in method numpy.zeros}\n      346    0.000    0.000    0.000    0.000 {built-in method numpy.arange}\n      205    0.000    0.000    0.000    0.000 {built-in method builtins.isinstance}\n      288    0.000    0.000    0.000    0.000 {method 'conj' of 'numpy.ndarray' objects}\n       51    0.000    0.000    0.000    0.000 sections.py:25(finite_real)\n       50    0.000    0.000    0.000    0.000 sections.py:19(positive_integer)\n\n\n",
+      "implementation": "reference"
+    },
+    {
+      "case": "large",
+      "settings": {
+        "density": 1.5,
+        "x": 0.25,
+        "y": 1.1,
+        "radius": 6,
+        "length": 64,
+        "grid": 48,
+        "variant": "optimized",
+        "cost_scope": "plan construction plus bounds"
+      },
+      "validation": {
+        "passed": true,
+        "endpoint_atol": 2e-12,
+        "endpoint_rtol": 2e-12,
+        "analytic_errors": {
+          "gaussian_tail": 1.274973646328754e-29,
+          "localization": 8.657051959278982e-05,
+          "phase_grid": 0.011880949736519833
+        },
+        "roundoff_certified": false
+      },
+      "source_sha256": "1607c25a09ab0c2267ae3bde702e44178093f7f8c956649b611403c2c7cb6d19",
+      "setup_seconds": 0.1320424999576062,
+      "first_call_seconds": 0.022805208922363818,
+      "warm_seconds": [
+        0.022779125021770597,
+        0.02264529198873788,
+        0.024995084037072957,
+        0.02255070791579783,
+        0.02308666694443673
+      ],
+      "median_seconds": 0.022779125021770597,
+      "minimum_seconds": 0.02255070791579783,
+      "maximum_seconds": 0.024995084037072957,
+      "python_traced_peak_bytes": 291770,
+      "fresh_worker_peak_rss_bytes": 55001088,
+      "profile": "         2634 function calls (2631 primitive calls) in 0.024 seconds\n\n   Ordered by: cumulative time\n   List reduced from 104 to 14 due to restriction <14>\n\n   ncalls  tottime  percall  cumtime  percall filename:lineno(function)\n        1    0.000    0.000    0.024    0.024 core_cases.py:12(call)\n        1    0.000    0.000    0.023    0.023 sections.py:159(bounds)\n       48    0.000    0.000    0.022    0.000 _util.py:1102(wrapper)\n       48    0.021    0.000    0.022    0.000 _decomp.py:688(eig_banded)\n       48    0.000    0.000    0.001    0.000 sections.py:136(band)\n       48    0.000    0.000    0.001    0.000 einsumfunc.py:1242(einsum)\n       48    0.001    0.000    0.001    0.000 {built-in method numpy._core._multiarray_umath.c_einsum}\n        1    0.000    0.000    0.000    0.000 sections.py:50(__init__)\n       48    0.000    0.000    0.000    0.000 _util.py:364(_asarray_validated)\n       48    0.000    0.000    0.000    0.000 _function_base_impl.py:615(asarray_chkfinite)\n      253    0.000    0.000    0.000    0.000 {built-in method builtins.isinstance}\n       48    0.000    0.000    0.000    0.000 _aliases.py:70(asarray)\n       51    0.000    0.000    0.000    0.000 sections.py:25(finite_real)\n      101    0.000    0.000    0.000    0.000 <frozen abc>:117(__instancecheck__)\n\n\n",
+      "implementation": "optimized"
+    }
+  ]
+}
